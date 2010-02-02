@@ -87,7 +87,7 @@ module Rails
         end
 
         app.config.paths.lib.each do |path|
-          Dir.glob("#{path}/**/*.rb").sort.each { |file| require file }
+          Dir.glob("#{path}/**/*.rb").sort.each { |file| require file unless file.match(/#{path}\/generators\/*/) }
         end
 
         app.config.paths.app.models.each do |path|
