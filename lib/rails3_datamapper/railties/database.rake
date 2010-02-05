@@ -3,6 +3,10 @@ require 'rails3_datamapper/storage'
 
 namespace :db do
 
+  namespace :test do
+    task :prepare => ['db:setup']
+  end
+
   task :load_config => :rails_env do
     Rails::DataMapper.configurations = Rails::Application.config.database_configuration
   end
@@ -96,10 +100,6 @@ namespace :db do
   task :seed => :environment do
     seed_file = File.join(Rails.root, 'db', 'seeds.rb')
     load(seed_file) if File.exist?(seed_file)
-  end
-
-  namespace :test do
-    task :prepare => ['db:drop', 'db:create', 'db:automigrate']
   end
 
 end
