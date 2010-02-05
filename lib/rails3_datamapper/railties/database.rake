@@ -98,4 +98,8 @@ namespace :db do
     load(seed_file) if File.exist?(seed_file)
   end
 
+  namespace :test do
+    task :prepare => ['db:drop', 'db:create', 'db:automigrate']
+  end
+
 end
